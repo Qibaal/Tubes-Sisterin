@@ -14,7 +14,7 @@
 # ENVIRONMENT
 #--------------------------------------------------------------------
 
-# CI_ENVIRONMENT = production
+CI_ENVIRONMENT = development
 
 #--------------------------------------------------------------------
 # APP
@@ -30,13 +30,13 @@
 # DATABASE
 #--------------------------------------------------------------------
 
-# database.default.hostname = localhost
-# database.default.database = ci4
-# database.default.username = root
-# database.default.password = root
-# database.default.DBDriver = MySQLi
-# database.default.DBPrefix =
-# database.default.port = 3306
+database.default.hostname = localhost
+database.default.database = tubes_sisterin
+database.default.username = postgres
+database.default.password = iqbal2806
+database.default.DBDriver = Postgre
+database.default.DBPrefix =
+database.default.port = 5432
 
 # If you use MySQLi as tests, first update the values of Config\Database::$tests.
 # database.tests.hostname = localhost
@@ -58,9 +58,8 @@
 #--------------------------------------------------------------------
 # SESSION
 #--------------------------------------------------------------------
-
-# session.driver = 'CodeIgniter\Session\Handlers\FileHandler'
-# session.savePath = null
+# public $sessionDriver = 'CodeIgniter\Session\Handlers\DatabaseHandler';
+# public $sessionSavePath = 'ci_sessions';
 
 #--------------------------------------------------------------------
 # LOGGER
