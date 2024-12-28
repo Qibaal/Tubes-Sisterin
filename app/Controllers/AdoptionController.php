@@ -31,7 +31,7 @@ class AdoptionController extends Controller
         //         $animal['accessories'] = $catNeeds['accessories'];
         //         $animal['cage'] = $catNeeds['cage'];
         //     }
-        }
+        // }
     
         // return view('adoption', ['animals' => $animals]);
         return view('adoption');
