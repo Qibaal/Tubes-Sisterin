@@ -8,6 +8,7 @@
 <body>
     <h1>Request Adoption for <?= esc($animal['name']) ?></h1>
     <form action="/adoption/request/<?= $animal['id'] ?>" method="post">
+        <?= csrf_field() ?>
         <label for="income">Monthly Income:</label>
         <input type="number" name="income" id="income" step="0.01" required><br>
 
@@ -28,5 +29,6 @@
 
         <button type="submit">Submit Request</button>
     </form>
+
 </body>
 </html>

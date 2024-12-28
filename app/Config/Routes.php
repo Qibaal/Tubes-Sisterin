@@ -19,10 +19,9 @@ $routes->group('profile', ['filter' => 'auth'], function($routes) {
     $routes->post('update', 'ProfileController::update');
 });
 
-$routes->group('', ['filter' => 'auth'], function($routes) {
-    $routes->get('adoption', 'AdoptionController::index');
-    $routes->get('adoption/request/(:num)', 'AdoptionController::requestAdoption/$1');
-    $routes->post('adoption/request/(:num)', 'AdoptionController::requestAdoption/$1');
+$routes->group('adoption', ['filter' => 'auth'], function($routes) {
+    $routes->get('', 'AdoptionController::index'); // Route for the adoption list page
+    $routes->match(['get', 'post'], 'request/(:num)', 'AdoptionController::requestAdoption/$1'); // Route for adoption requests
 });
 
 $routes->group('admin', ['filter' => 'admin'], function ($routes) {

@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class AnimalModel extends Model
 {
-    protected $table = 'animals';
+    protected $table = 'cats'; 
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'type', 'age', 'description', 'created_at', 'updated_at'];
+    protected $allowedFields = ['name', 'breed', 'age', 'health_status', 'description', 'created_at', 'updated_at'];
 }

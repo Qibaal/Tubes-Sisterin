@@ -14,9 +14,14 @@
             <ul class="animal-list">
                 <?php foreach ($animals as $animal): ?>
                     <li class="animal-item">
-                        <h2><?= esc($animal['name']) ?> (<?= esc($animal['type']) ?>)</h2>
+                        <h2><?= esc($animal['name']) ?> (<?= esc($animal['breed']) ?>)</h2>
                         <p><strong>Age:</strong> <?= esc($animal['age']) ?> years</p>
                         <p><?= esc($animal['description']) ?></p>
+                        <p><strong>Food:</strong> <?= esc($animal['food']) ?></p>
+                        <p><strong>Food per Day:</strong> <?= esc($animal['food_per_day']) ?> servings</p>
+                        <p><strong>Treatment:</strong> <?= esc($animal['treatment']) ?></p>
+                        <p><strong>Accessories:</strong> <?= esc($animal['accessories']) ?></p>
+                        <p><strong>Cage:</strong> <?= esc($animal['cage']) ?></p>
                         <form action="/adoption/request/<?= $animal['id'] ?>" method="post">
                             <button type="submit">Request Adoption</button>
                         </form>

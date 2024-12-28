@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateAnimalsTable extends Migration
+class CreateCatsTable extends Migration
 {
     public function up()
     {
@@ -20,7 +20,7 @@ class CreateAnimalsTable extends Migration
                 'constraint' => 100,
                 'null' => false,
             ],
-            'type' => [
+            'breed' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
                 'null' => false,
@@ -28,6 +28,11 @@ class CreateAnimalsTable extends Migration
             'age' => [
                 'type' => 'INT',
                 'constraint' => 3,
+                'null' => true,
+            ],
+            'health_status' => [
+                'type' => 'VARCHAR',
+                'constraint' => 100,
                 'null' => true,
             ],
             'description' => [
@@ -45,11 +50,11 @@ class CreateAnimalsTable extends Migration
         ]);
 
         $this->forge->addKey('id', true); // Primary key
-        $this->forge->createTable('animals');
+        $this->forge->createTable('cats');
     }
 
     public function down()
     {
-        $this->forge->dropTable('animals');
+        $this->forge->dropTable('cats');
     }
 }
