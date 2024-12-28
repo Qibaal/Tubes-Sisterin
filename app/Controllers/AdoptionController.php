@@ -15,25 +15,26 @@ class AdoptionController extends Controller
         //     return redirect()->to('/login')->with('error', 'You need to log in first.');
         // }
     
-        $animalModel = new AnimalModel();
-        $catNeedsModel = new \App\Models\CatNeedsModel();
+        // $animalModel = new AnimalModel();
+        // $catNeedsModel = new \App\Models\CatNeedsModel();
     
-        // Get all animals
-        $animals = $animalModel->findAll();
+        // // Get all animals
+        // $animals = $animalModel->findAll();
     
-        // Add cat needs to each animal
-        foreach ($animals as &$animal) {
-            $catNeeds = $catNeedsModel->where('breed', $animal['breed'])->first();
-            if ($catNeeds) {
-                $animal['food'] = $catNeeds['food'];
-                $animal['food_per_day'] = $catNeeds['food_per_day'];
-                $animal['treatment'] = $catNeeds['treatment'];
-                $animal['accessories'] = $catNeeds['accessories'];
-                $animal['cage'] = $catNeeds['cage'];
-            }
+        // // Add cat needs to each animal
+        // foreach ($animals as &$animal) {
+        //     $catNeeds = $catNeedsModel->where('breed', $animal['breed'])->first();
+        //     if ($catNeeds) {
+        //         $animal['food'] = $catNeeds['food'];
+        //         $animal['food_per_day'] = $catNeeds['food_per_day'];
+        //         $animal['treatment'] = $catNeeds['treatment'];
+        //         $animal['accessories'] = $catNeeds['accessories'];
+        //         $animal['cage'] = $catNeeds['cage'];
+        //     }
         }
     
-        return view('adoption', ['animals' => $animals]);
+        // return view('adoption', ['animals' => $animals]);
+        return view('adoption');
     }
 
     public function requestAdoption($animalId)
