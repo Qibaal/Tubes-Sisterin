@@ -11,9 +11,9 @@ class AdoptionController extends Controller
 {
     public function index()
     {
-        if (!session()->has('user_id')) {
-            return redirect()->to('/login')->with('error', 'You need to log in first.');
-        }
+        // if (!session()->has('user_id')) {
+        //     return redirect()->to('/login')->with('error', 'You need to log in first.');
+        // }
     
         $animalModel = new AnimalModel();
         $catNeedsModel = new \App\Models\CatNeedsModel();

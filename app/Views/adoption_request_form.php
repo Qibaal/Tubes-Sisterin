@@ -67,7 +67,7 @@
 <body>
     <div class="container">
         <h1>Request Adoption for <span id="animal-name"></span></h1>
-        <form action="/adoption/request/" method="post">
+        <form action="/adoption/request/<?= $animal['id'] ?>" method="post">
             <div>
                 <label for="income">Monthly Income:</label>
                 <input type="number" name="income" id="income" step="0.01" required>
