@@ -36,6 +36,11 @@ class AdoptionController extends Controller
         // return view('adoption', ['animals' => $animals]);
         return view('adoption');
     }
+    
+    public function info()
+    {
+        return view('adoption-info.php');
+    }
 
     public function requestAdoption($animalId)
     {

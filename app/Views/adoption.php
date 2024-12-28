@@ -3,66 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adoption Page - Sugency</title>
+    <title>Adopt a Furry Friend - Sugency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e6f3ff;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             color: #333;
+            line-height: 1.6;
         }
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 40px 20px;
         }
         h1 {
-            color: #4a90e2;
+            color: #3a7bd5;
             text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .adopt-button {
+            display: inline-block;
+            text-align: center;
+            background-color: #3a7bd5;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            width: auto;
+            margin-top: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            text-align: center;
+        }
+        .adopt-button:hover {
+            background-color: #2c5ea3;
+            transform: scale(1.05);
         }
         .animal-list {
             list-style-type: none;
             padding: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
         .animal-item {
-            background-color: #f0f8ff;
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .animal-item h2 {
-            color: #4a90e2;
-            margin-top: 0;
+        .animal-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
-        .animal-item p {
-            margin: 5px 0;
-        }
-        button {
-            background-color: #4a90e2;
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+        .animal-image {
             width: 100%;
-            margin-top: 10px;
+            height: 200px;
+            object-fit: cover;
         }
-        button:hover {
-            background-color: #3a7bc8;
+        .animal-info {
+            padding: 20px;
+        }
+        .animal-info h2 {
+            color: #3a7bd5;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        .animal-info p {
+            margin: 10px 0;
+            color: #555;
+        }
+        .health-status {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Available Animals for Adoption</h1>
+        <h1>Find Your Perfect Companion</h1>
 
         <ul class="animal-list" id="animal-list">
             <!-- Animal items will be populated here -->
@@ -78,11 +113,8 @@
                 breed: 'Persian',
                 age: 3,
                 description: 'A lovely Persian cat with a gentle temperament.',
-                food: 'Premium cat food',
-                food_per_day: 2,
-                treatment: 'Regular grooming',
-                accessories: 'Scratching post, toys',
-                cage: 'Large cat tree'
+                health_status: 'Healthy',
+                image: '/asset/persian.png'
             },
             {
                 id: 2,
@@ -90,11 +122,8 @@
                 breed: 'Golden Retriever',
                 age: 2,
                 description: 'An energetic and friendly Golden Retriever.',
-                food: 'High-quality dog food',
-                food_per_day: 3,
-                treatment: 'Regular exercise',
-                accessories: 'Leash, chew toys',
-                cage: 'Large dog bed'
+                health_status: 'Vaccinated',
+                image: '/asset/persian.png'
             }
         ];
 
@@ -102,17 +131,15 @@
         function createAnimalItem(animal) {
             return `
                 <li class="animal-item">
-                    <h2>${animal.name} (${animal.breed})</h2>
-                    <p><strong>Age:</strong> ${animal.age} years</p>
-                    <p>${animal.description}</p>
-                    <p><strong>Food:</strong> ${animal.food}</p>
-                    <p><strong>Food per Day:</strong> ${animal.food_per_day} servings</p>
-                    <p><strong>Treatment:</strong> ${animal.treatment}</p>
-                    <p><strong>Accessories:</strong> ${animal.accessories}</p>
-                    <p><strong>Cage:</strong> ${animal.cage}</p>
-                    <form action="/adoption/request/${animal.id}" method="post">
-                        <button type="submit">Request Adoption</button>
-                    </form>
+                    <img src="${animal.image}" alt="${animal.name}" class="animal-image">
+                    <div class="animal-info">
+                        <h2>${animal.name}</h2>
+                        <p><strong>Breed:</strong> ${animal.breed}</p>
+                        <p><strong>Age:</strong> ${animal.age} ${animal.age === 1 ? 'year' : 'years'}</p>
+                        <p>${animal.description}</p>
+                        <span class="health-status">${animal.health_status}</span>
+                        <a href="adoption_info.php?id=${animal.id}" class="adopt-button">Adopt Me</a>
+                    </div>
                 </li>
             `;
         }

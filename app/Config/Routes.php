@@ -26,6 +26,7 @@ $routes->group('profile', ['filter' => 'auth'], function($routes) {
 
 $routes->group('adoption', function($routes) {
     $routes->get('', 'AdoptionController::index'); // Route for the adoption list page
+    $routes->get('/example',  'AdoptionController::info');
     $routes->match(['get', 'post'], 'request/(:num)', 'AdoptionController::requestAdoption/$1'); // Route for adoption requests
 });
 
