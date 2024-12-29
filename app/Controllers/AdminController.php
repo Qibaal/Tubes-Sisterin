@@ -29,7 +29,7 @@ class AdminController extends BaseController
 
         $data = [
             'name' => $this->request->getPost('name'),
-            'type' => $this->request->getPost('type'),
+            'breed' => $this->request->getPost('type'),
             'age' => $this->request->getPost('age'),
             'description' => $this->request->getPost('description'),
             'created_at' => date('Y-m-d H:i:s'),
@@ -58,7 +58,7 @@ class AdminController extends BaseController
 
         $data = [
             'name' => $this->request->getPost('name'),
-            'type' => $this->request->getPost('type'),
+            'breed' => $this->request->getPost('type'),
             'age' => $this->request->getPost('age'),
             'description' => $this->request->getPost('description'),
         ];

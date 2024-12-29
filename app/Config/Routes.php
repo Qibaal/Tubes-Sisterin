@@ -19,15 +19,10 @@ $routes->group('profile', ['filter' => 'auth'], function($routes) {
     $routes->post('update', 'ProfileController::update');
 });
 
-// $routes->group('adoption', ['filter' => 'auth'], function($routes) {
-//     $routes->get('', 'AdoptionController::index'); // Route for the adoption list page
-//     $routes->match(['get', 'post'], 'request/(:num)', 'AdoptionController::requestAdoption/$1'); // Route for adoption requests
-// });
-
-$routes->group('adoption', function($routes) {
-    $routes->get('', 'AdoptionController::index'); // Route for the adoption list page
-    $routes->get('/example',  'AdoptionController::info');
-    $routes->match(['get', 'post'], 'request/(:num)', 'AdoptionController::requestAdoption/$1'); // Route for adoption requests
+$routes->group('adoption', ['filter' => 'auth'], function($routes) {
+    $routes->get('', 'AdoptionController::index');
+    $routes->get('info/(:num)', 'AdoptionController::showInfo/$1');
+    $routes->match(['get', 'post'], 'request/(:num)', 'AdoptionController::requestAdoption/$1'); 
 });
 
 $routes->group('admin', ['filter' => 'admin'], function ($routes) {

@@ -28,7 +28,7 @@
                 <tr>
                     <td><?= esc($animal['id']) ?></td>
                     <td><?= esc($animal['name']) ?></td>
-                    <td><?= esc($animal['type']) ?></td>
+                    <td><?= esc($animal['breed']) ?></td>
                     <td><?= esc($animal['age']) ?></td>
                     <td><?= esc($animal['description']) ?></td>
                     <td>

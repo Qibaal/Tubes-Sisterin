@@ -99,56 +99,25 @@
     <div class="container">
         <h1>Find Your Perfect Companion</h1>
 
-        <ul class="animal-list" id="animal-list">
-            <!-- Animal items will be populated here -->
+        <ul class="animal-list">
+            <?php if (!empty($animals) && is_array($animals)): ?>
+                <?php foreach ($animals as $animal): ?>
+                    <li class="animal-item">
+                        <img src="/asset/persian.png" alt="<?= esc($animal['name']) ?>" class="animal-image">
+                        <div class="animal-info">
+                            <h2><?= esc($animal['name']) ?></h2>
+                            <p><strong>Breed:</strong> <?= esc($animal['breed']) ?></p>
+                            <p><strong>Age:</strong> <?= esc($animal['age']) ?> <?= esc($animal['age'] == 1 ? 'year' : 'years') ?></p>
+                            <p><?= esc($animal['description']) ?></p>
+                            <span class="health-status"><?= esc($animal['health_status']) ?></span>
+                            <a href="/adoption/info/<?= esc($animal['id']) ?>" class="adopt-button">Adopt Me</a>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No animals available for adoption at the moment.</p>
+            <?php endif; ?>
         </ul>
     </div>
-
-    <script>
-        // Simulated animal data (replace with actual data fetching logic)
-        const animals = [
-            {
-                id: 1,
-                name: 'Fluffy',
-                breed: 'Persian',
-                age: 3,
-                description: 'A lovely Persian cat with a gentle temperament.',
-                health_status: 'Healthy',
-                image: '/asset/persian.png'
-            },
-            {
-                id: 2,
-                name: 'Buddy',
-                breed: 'Golden Retriever',
-                age: 2,
-                description: 'An energetic and friendly Golden Retriever.',
-                health_status: 'Vaccinated',
-                image: '/asset/persian.png'
-            }
-        ];
-
-        // Function to create animal item HTML
-        function createAnimalItem(animal) {
-            return `
-                <li class="animal-item">
-                    <img src="${animal.image}" alt="${animal.name}" class="animal-image">
-                    <div class="animal-info">
-                        <h2>${animal.name}</h2>
-                        <p><strong>Breed:</strong> ${animal.breed}</p>
-                        <p><strong>Age:</strong> ${animal.age} ${animal.age === 1 ? 'year' : 'years'}</p>
-                        <p>${animal.description}</p>
-                        <span class="health-status">${animal.health_status}</span>
-                        <a href="adoption_info.php?id=${animal.id}" class="adopt-button">Adopt Me</a>
-                    </div>
-                </li>
-            `;
-        }
-
-        // Populate animal list
-        const animalList = document.getElementById('animal-list');
-        animals.forEach(animal => {
-            animalList.innerHTML += createAnimalItem(animal);
-        });
-    </script>
 </body>
 </html>

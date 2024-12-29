@@ -11,36 +11,36 @@ class AdoptionController extends Controller
 {
     public function index()
     {
-        // if (!session()->has('user_id')) {
-        //     return redirect()->to('/login')->with('error', 'You need to log in first.');
-        // }
+        if (!session()->has('user_id')) {
+            return redirect()->to('/login')->with('error', 'You need to log in first.');
+        }
     
-        // $animalModel = new AnimalModel();
-        // $catNeedsModel = new \App\Models\CatNeedsModel();
-    
-        // // Get all animals
-        // $animals = $animalModel->findAll();
-    
-        // // Add cat needs to each animal
-        // foreach ($animals as &$animal) {
-        //     $catNeeds = $catNeedsModel->where('breed', $animal['breed'])->first();
-        //     if ($catNeeds) {
-        //         $animal['food'] = $catNeeds['food'];
-        //         $animal['food_per_day'] = $catNeeds['food_per_day'];
-        //         $animal['treatment'] = $catNeeds['treatment'];
-        //         $animal['accessories'] = $catNeeds['accessories'];
-        //         $animal['cage'] = $catNeeds['cage'];
-        //     }
-        // }
-    
-        // return view('adoption', ['animals' => $animals]);
-        return view('adoption');
+        $animalModel = new AnimalModel();
+
+        $animals = $animalModel->findAll();
+
+        return view('adoption', ['animals' => $animals]);
     }
     
-    public function info()
+    public function showInfo($animalId)
     {
-        return view('adoption-info.php');
+        $animalModel = new \App\Models\AnimalModel();
+        $catNeedsModel = new \App\Models\CatNeedsModel();
+    
+        // Fetch the animal's details
+        $animal = $animalModel->find($animalId);
+    
+        if (!$animal) {
+            return redirect()->to('/adoption')->with('error', 'Animal not found.');
+        }
+    
+        // Fetch the cat's specific needs based on the breed
+        $catNeeds = $catNeedsModel->where('breed', $animal['breed'])->first();
+    
+        // Pass the data to the view
+        return view('adoption_info', ['animal' => $animal, 'catNeeds' => $catNeeds]);
     }
+    
 
     public function requestAdoption($animalId)
     {
