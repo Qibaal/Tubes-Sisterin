@@ -99,6 +99,6 @@ class AuthController extends ResourceController
         }
 
         session()->destroy();
-        return $this->respond(['message' => 'Logged out successfully']);
+        return redirect()->to('/login');
     }
 }

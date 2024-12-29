@@ -6,6 +6,53 @@
     <title>Adopt a Furry Friend - Sugency</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #4a90e2;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            margin: 0 10px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #357abd;
+        }
+
+        .navbar .auth-buttons a {
+            background-color: white;
+            color: #4a90e2;
+            font-weight: bold;
+            padding: 8px 15px;
+        }
+
+        .navbar .auth-buttons a:hover {
+            background-color: #e1eaf4;
+        }
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f0f4f8;
@@ -96,7 +143,22 @@
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <h1>Sugency</h1>
+        <ul>
+            <?php if (!session()->get('loggedin')): ?>
+                <li class="auth-buttons"><a href="/signup">Sign Up</a></li>
+                <li class="auth-buttons"><a href="/login">Login</a></li>
+            <?php else: ?>
+                <li><a href="/adoption">Cats</a></li>
+                <li><a href="/adoption/history">History</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+            <?php endif; ?>
+        </ul>
+    </div>
     <div class="container">
+        
         <h1>Find Your Perfect Companion</h1>
 
         <ul class="animal-list">
