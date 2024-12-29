@@ -23,11 +23,12 @@ $routes->group('adoption', ['filter' => 'auth'], function($routes) {
     $routes->get('', 'AdoptionController::index');
     $routes->get('info/(:num)', 'AdoptionController::showInfo/$1');
     $routes->match(['get', 'post'], 'request/(:num)', 'AdoptionController::requestAdoption/$1'); 
+    $routes->get('history', 'AdoptionController::showHistory');
 });
 
 $routes->group('admin', ['filter' => 'admin'], function ($routes) {
     $routes->get('animals', 'AdminController::index');
-    $routes->get('animals/create', 'AdminController::create');
+    $routes->get('animals/add', 'AdminController::create');
     $routes->post('animals/store', 'AdminController::store');
     $routes->get('animals/edit/(:num)', 'AdminController::edit/$1');
     $routes->post('animals/update/(:num)', 'AdminController::update/$1');

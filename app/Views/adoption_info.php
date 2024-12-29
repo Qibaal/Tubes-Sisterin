@@ -1,38 +1,3 @@
-<?php
-// adoption_info.php
-
-// Get the animal ID from the URL
-$animal_id = isset($_GET['id']) ? $_GET['id'] : null;
-
-// Simulate database data (replace with actual database query)
-$animals = [
-    1 => [
-        'name' => 'Fluffy',
-        'breed' => 'Persian',
-        'age' => 3,
-        'health_status' => 'Healthy',
-        'description' => 'Fluffy is a lovely Persian cat with a gentle temperament. She\'s known for her calm demeanor and affectionate nature. Fluffy enjoys lounging in sunny spots and being groomed. She\'s an ideal companion for those seeking a relaxed and loving pet.',
-        'image' => '/asset/persian.png'
-    ],
-    2 => [
-        'name' => 'Buddy',
-        'breed' => 'Golden Retriever',
-        'age' => 2,
-        'health_status' => 'Vaccinated',
-        'description' => 'An energetic and friendly Golden Retriever.',
-        'image' => '/asset/persian.png'
-    ]
-];
-
-// Get the animal data
-$animal = isset($animals[$animal_id]) ? $animals[$animal_id] : null;
-
-// If animal not found, redirect to index
-if (!$animal) {
-    header('Location: index.html');
-    exit();
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -160,32 +125,39 @@ if (!$animal) {
         </header>
         <div class="pet-info">
             <div class="pet-image">
-                <img src="<?php echo htmlspecialchars($animal['image']); ?>" alt="<?php echo htmlspecialchars($animal['name']); ?>">
+                <img src="/asset/persian.png" alt="<?= esc($animal['name']) ?>">
             </div>
+            
             <div class="pet-details">
                 <div class="info-group">
                     <h2>Basic Information</h2>
-                    <div class="info-item"><strong>Name:</strong> <?php echo htmlspecialchars($animal['name']); ?></div>
-                    <div class="info-item"><strong>Breed:</strong> <?php echo htmlspecialchars($animal['breed']); ?></div>
-                    <div class="info-item"><strong>Age:</strong> <?php echo htmlspecialchars($animal['age']); ?> years</div>
-                    <div class="info-item"><strong>Health Status:</strong> <?php echo htmlspecialchars($animal['health_status']); ?></div>
+                    <div class="info-item"><strong>Name:</strong> <?= esc($animal['name']) ?></div>
+                    <div class="info-item"><strong>Breed:</strong> <?= esc($animal['breed']) ?></div>
+                    <div class="info-item"><strong>Age:</strong> <?= esc($animal['age']) ?> years</div>
+                    <div class="info-item"><strong>Health Status:</strong> <?= esc($animal['health_status']) ?></div>
                 </div>
+                
+                <?php if (isset($animal['description'])): ?>
                 <div class="info-group">
                     <h2>Description</h2>
-                    <p><?php echo htmlspecialchars($animal['description']); ?></p>
+                    <p><?= esc($animal['description']) ?></p>
                 </div>
-                <!-- Rest of the pet details remain the same -->
+                <?php endif; ?>
+
+                <?php if (isset($catNeeds)): ?>
+                <div class="info-group">
+                    <h2>Breed-Specific Needs</h2>
+                    <div class="info-item"><strong>Food:</strong> <?= esc($catNeeds['food']) ?></div>
+                    <div class="info-item"><strong>Food per Day:</strong> <?= esc($catNeeds['food_per_day']) ?></div>
+                    <div class="info-item"><strong>Treatment:</strong> <?= esc($catNeeds['treatment']) ?> years</div>
+                    <div class="info-item"><strong>Accessories:</strong> <?= esc($catNeeds['accessories']) ?></div>
+                    <div class="info-item"><strong>Cage:</strong> <?= esc($catNeeds['cage']) ?></div>
+                </div>
+                <?php endif; ?>
             </div>
         </div>
-        <a href="#" class="adoption-button" id="adoptionButton">Request Adoption</a>
+        <a href="../../adoption/request/<?= esc($animal['id']) ?>" class="adoption-button">Request Adoption</a>
     </div>
 
-    <script>
-        // You can add JavaScript here for any interactive features
-        document.querySelector('.adoption-button').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Thank you for your interest in adopting Fluffy! Our team will contact you soon to proceed with the adoption process.');
-        });
-    </script>
 </body>
 </html>

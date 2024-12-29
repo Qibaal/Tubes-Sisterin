@@ -4,6 +4,7 @@
 namespace App\Controllers;
 
 use App\Models\AnimalModel;
+use App\Models\CatNeedsModel;
 use CodeIgniter\Controller;
 use \App\Models\AdoptionRequestModel;
 
@@ -24,84 +25,70 @@ class AdoptionController extends Controller
     
     public function showInfo($animalId)
     {
-        $animalModel = new \App\Models\AnimalModel();
-        $catNeedsModel = new \App\Models\CatNeedsModel();
-    
-        // Fetch the animal's details
+        $animalModel = new AnimalModel();
+        $catNeedsModel = new CatNeedsModel();
+
         $animal = $animalModel->find($animalId);
     
         if (!$animal) {
             return redirect()->to('/adoption')->with('error', 'Animal not found.');
         }
-    
-        // Fetch the cat's specific needs based on the breed
+
         $catNeeds = $catNeedsModel->where('breed', $animal['breed'])->first();
     
-        // Pass the data to the view
         return view('adoption_info', ['animal' => $animal, 'catNeeds' => $catNeeds]);
     }
-    
 
     public function requestAdoption($animalId)
     {
         $userId = session()->get('user_id');
-    
-        // Ensure the user is logged in
+
         if (!$userId) {
             return redirect()->to('/login')->with('error', 'You need to log in to make an adoption request.');
         }
-    
-        // Check if it's a POST request (form submission)
+
         if ($this->request->getMethod() === 'post') {
             return $this->handleAdoptionRequest($userId, $animalId);
         }
-    
-        // Otherwise, display the adoption request form
+
         return $this->showAdoptionRequestForm($animalId);
     }
-    
-    /**
-     * Handles the adoption request submission.
-     */
+
     private function handleAdoptionRequest($userId, $animalId)
     {
-        $adoptionRequestModel = new \App\Models\AdoptionRequestModel();
+        $adoptionRequestModel = new AdoptionRequestModel();
     
-        // Check if an adoption request already exists for this user and animal
-        $existingRequest = $adoptionRequestModel->where([
-            'user_id' => $userId,
-            'animal_id' => $animalId,
-        ])->first();
+        try {
+            // Format has_pets as boolean
+            $hasPets = $this->request->getPost('has_pets');
+            $hasPetsBoolean = in_array($hasPets, ['1', 'true', true]) ? true : false;
     
-        if ($existingRequest) {
-            return redirect()->back()->with('error', 'You have already requested adoption for this animal.');
+            $data = [
+                'user_id' => (int)$userId,
+                'animal_id' => (int)$animalId,
+                'income' => (float)$this->request->getPost('income'),
+                'living_type' => $this->request->getPost('living_type'),
+                'has_pets' => $hasPetsBoolean,
+                'reason' => $this->request->getPost('reason'),
+                'status' => 'pending'
+            ];
+    
+            if (!$adoptionRequestModel->insert($data)) {
+                log_message('error', 'Validation errors: ' . print_r($adoptionRequestModel->errors(), true));
+                return redirect()->back()
+                    ->with('error', 'Validation failed: ' . implode(', ', $adoptionRequestModel->errors()));
+            }
+    
+            return redirect()->to('/adoption')->with('success', 'Adoption request submitted successfully.');
+        } catch (\Exception $e) {
+            log_message('error', 'Exception: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Database error occurred.');
         }
-    
-        // Insert a new adoption request
-        $data = [
-            'user_id' => $userId,
-            'animal_id' => $animalId,
-            'income' => $this->request->getPost('income'),
-            'living_type' => $this->request->getPost('living_type'),
-            'has_pets' => $this->request->getPost('has_pets'),
-            'reason' => $this->request->getPost('reason'),
-            'status' => 'pending',
-            'created_at' => date('Y-m-d H:i:s'),
-        ];
-    
-        if (!$adoptionRequestModel->insert($data)) {
-            return redirect()->to('/adoption')->with('error', 'Failed to submit the adoption request.');
-        }
-    
-        return redirect()->to('/adoption')->with('success', 'Adoption request submitted successfully.');
     }
     
-    /**
-     * Displays the adoption request form for the specified animal.
-     */
     private function showAdoptionRequestForm($animalId)
     {
-        $animalModel = new \App\Models\AnimalModel();
+        $animalModel = new AnimalModel();
         $animal = $animalModel->find($animalId);
     
         if (!$animal) {
@@ -110,5 +97,14 @@ class AdoptionController extends Controller
     
         return view('adoption_request_form', ['animal' => $animal]);
     }
-      
+    
+    public function showHistory()
+    {
+        $adoptionRequestModel = new AdoptionRequestModel();
+
+        $userId = session()->get('user_id');
+        $data['requests'] = $adoptionRequestModel->where('user_id', $userId)->findAll();
+
+        return view('adoption/history', $data);
+    }
 }

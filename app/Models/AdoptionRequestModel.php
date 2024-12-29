@@ -8,6 +8,10 @@ class AdoptionRequestModel extends Model
 {
     protected $table = 'adoption_requests';
     protected $primaryKey = 'id';
+    protected $useTimestamps = true;
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
+    
     protected $allowedFields = [
         'user_id',
         'animal_id',
@@ -15,8 +19,17 @@ class AdoptionRequestModel extends Model
         'income',
         'living_type',
         'has_pets',
-        'reason',
-        'created_at',
-        'updated_at',
+        'reason'
+    ];
+
+    // Add validation rules
+    protected $validationRules = [
+        'user_id' => 'required|numeric',
+        'animal_id' => 'required|numeric',
+        'income' => 'required|numeric',
+        'living_type' => 'required|in_list[house,apartment]', // match your enum values
+        'has_pets' => 'required|in_list[true,false,0,1]',
+        'reason' => 'required|string',
+        'status' => 'required|in_list[pending,approved,rejected]' // match your enum values
     ];
 }

@@ -67,7 +67,7 @@
 <body>
     <div class="container">
         <h1>Request Adoption for <span id="animal-name"></span></h1>
-        <form action="/adoption/request/<?= $animal['id'] ?>" method="post">
+        <form action="<?= base_url('adoption/request/' . $animal['id']) ?>" method="POST">
             <div>
                 <label for="income">Monthly Income:</label>
                 <input type="number" name="income" id="income" step="0.01" required>
@@ -85,11 +85,11 @@
                 <label>Do you currently have pets?</label>
                 <div class="radio-group">
                     <div>
-                        <input type="radio" name="has_pets" value="1" id="has_pets_yes" required>
+                        <input type="radio" name="has_pets" value="true" id="has_pets_yes" required>
                         <label for="has_pets_yes">Yes</label>
                     </div>
                     <div>
-                        <input type="radio" name="has_pets" value="0" id="has_pets_no" required>
+                        <input type="radio" name="has_pets" value="false" id="has_pets_no" required>
                         <label for="has_pets_no">No</label>
                     </div>
                 </div>
@@ -104,10 +104,5 @@
         </form>
     </div>
 
-    <script>
-        // Simulated animal data (replace with actual data fetching logic)
-        const animalName = 'Fluffy';
-        document.getElementById('animal-name').textContent = animalName;
-    </script>
 </body>
 </html>

@@ -84,9 +84,9 @@ class AdminController extends BaseController
 
         $adoptionRequestModel = new \App\Models\AdoptionRequestModel();
         $requests = $adoptionRequestModel
-            ->select('adoption_requests.*, users.full_name, animals.name as animal_name')
+            ->select('adoption_requests.*, users.full_name, cats.name as animal_name')
             ->join('users', 'users.id = adoption_requests.user_id')
-            ->join('animals', 'animals.id = adoption_requests.animal_id')
+            ->join('cats', 'cats.id = adoption_requests.animal_id')
             ->findAll();
 
         return view('admin/requests', ['requests' => $requests]);
