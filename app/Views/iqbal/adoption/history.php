@@ -100,6 +100,62 @@
             padding: 20px;
             color: #999;
         }
+
+        .product-recommendations h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .product-card {
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            padding: 1rem;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        .product-card p {
+            font-size: 0.9rem;
+            color: #555;
+            margin: 0.5rem 0;
+        }
+
+        .buy-button {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .buy-button:hover {
+            background-color: #0056b3;
+        }
+
     </style>
 </head>
 <body>
@@ -140,6 +196,21 @@
                                 <tr>
                                     <td colspan="7" class="note">
                                         Please go to the shelter to continue the adoption process.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" class="product-recommendations">
+                                        <h2>Recommended Products for Your New Companion</h2>
+                                        <div class="product-container">
+                                            <?php foreach ($products as $product): ?>
+                                                <div class="product-card">
+                                                    <img src="<?= $product['image']; ?>" alt="<?= $product['name']; ?>">
+                                                    <h3><?= $product['name']; ?></h3>
+                                                    <p><?= $product['description']; ?></p>
+                                                    <button class="buy-button">Buy</button>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endif; ?>

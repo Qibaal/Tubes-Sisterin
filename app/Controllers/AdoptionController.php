@@ -101,10 +101,28 @@ class AdoptionController extends Controller
     public function showHistory()
     {
         $adoptionRequestModel = new AdoptionRequestModel();
-
+    
         $userId = session()->get('user_id');
         $data['requests'] = $adoptionRequestModel->where('user_id', $userId)->findAll();
 
+        $data['products'] = [
+            [
+                'image' => '/asset/prod1.jpg',
+                'name' => 'Whiskas Tuna Delight',
+                'description' => 'A delicious tuna-flavored cat food',
+            ],
+            [
+                'image' => '/asset/prod2.jpg',
+                'name' => 'Cat Food',
+                'description' => 'Specially formulated dry food',
+            ],
+            [
+                'image' => '/asset/prod3.jpg',
+                'name' => 'Scratching Post',
+                'description' => 'Helps cats manage hairballs with balanced nutrition',
+            ],
+        ];
+    
         return view('iqbal/adoption/history', $data);
     }
 }
