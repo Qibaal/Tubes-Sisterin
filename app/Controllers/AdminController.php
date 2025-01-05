@@ -9,18 +9,18 @@ class AdminController extends BaseController
     public function index()
     {
         if (!session()->has('is_admin') || !session()->get('is_admin')) {
-            return redirect()->to('/login')->with('error', 'You must be an admin to access this page.');
+            return redirect()->to('/sugency/login')->with('error', 'You must be an admin to access this page.');
         }
 
         $animalModel = new AnimalModel();
         $animals = $animalModel->findAll();
 
-        return view('admin/animals/index', ['animals' => $animals]);
+        return view('iqbal/admin/animals/index', ['animals' => $animals]);
     }
 
     public function create()
     {
-        return view('admin/animals/create');
+        return view('iqbal/admin/animals/create');
     }
 
     public function store()
@@ -37,7 +37,7 @@ class AdminController extends BaseController
 
         $animalModel->insert($data);
 
-        return redirect()->to('/admin/animals')->with('success', 'Animal added successfully.');
+        return redirect()->to('/sugency/admin/animals')->with('success', 'Animal added successfully.');
     }
 
     public function edit($id)
@@ -46,10 +46,10 @@ class AdminController extends BaseController
         $animal = $animalModel->find($id);
 
         if (!$animal) {
-            return redirect()->to('/admin/animals')->with('error', 'Animal not found.');
+            return redirect()->to('/sugency/admin/animals')->with('error', 'Animal not found.');
         }
 
-        return view('admin/animals/edit', ['animal' => $animal]);
+        return view('iqbal/admin/animals/edit', ['animal' => $animal]);
     }
 
     public function update($id)
@@ -65,7 +65,7 @@ class AdminController extends BaseController
 
         $animalModel->update($id, $data);
 
-        return redirect()->to('/admin/animals')->with('success', 'Animal updated successfully.');
+        return redirect()->to('/sugency/admin/animals')->with('success', 'Animal updated successfully.');
     }
 
     public function delete($id)
@@ -73,13 +73,13 @@ class AdminController extends BaseController
         $animalModel = new AnimalModel();
         $animalModel->delete($id);
 
-        return redirect()->to('/admin/animals')->with('success', 'Animal deleted successfully.');
+        return redirect()->to('/sugency/admin/animals')->with('success', 'Animal deleted successfully.');
     }
 
     public function listRequests()
     {
         if (!session()->get('is_admin')) {
-            return redirect()->to('/login')->with('error', 'Admin access required.');
+            return redirect()->to('/sugency/login')->with('error', 'Admin access required.');
         }
 
         $adoptionRequestModel = new \App\Models\AdoptionRequestModel();
@@ -89,13 +89,13 @@ class AdminController extends BaseController
             ->join('cats', 'cats.id = adoption_requests.animal_id')
             ->findAll();
 
-        return view('admin/requests', ['requests' => $requests]);
+        return view('iqbal/admin/requests', ['requests' => $requests]);
     }
 
     public function updateRequestStatus($requestId, $status)
     {
         if (!session()->get('is_admin')) {
-            return redirect()->to('/login')->with('error', 'Admin access required.');
+            return redirect()->to('/sugency/login')->with('error', 'Admin access required.');
         }
 
         $adoptionRequestModel = new \App\Models\AdoptionRequestModel();
@@ -105,7 +105,7 @@ class AdminController extends BaseController
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        return redirect()->to('/admin/requests')->with('success', 'Request status updated successfully.');
+        return redirect()->to('/sugency/admin/requests')->with('success', 'Request status updated successfully.');
     }
 
 }

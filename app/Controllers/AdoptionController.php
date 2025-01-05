@@ -13,14 +13,14 @@ class AdoptionController extends Controller
     public function index()
     {
         if (!session()->has('user_id')) {
-            return redirect()->to('/login')->with('error', 'You need to log in first.');
+            return redirect()->to('/sugency/login')->with('error', 'You need to log in first.');
         }
     
         $animalModel = new AnimalModel();
 
         $animals = $animalModel->findAll();
 
-        return view('adoption', ['animals' => $animals]);
+        return view('iqbal/adoption/adoption', ['animals' => $animals]);
     }
     
     public function showInfo($animalId)
@@ -31,12 +31,12 @@ class AdoptionController extends Controller
         $animal = $animalModel->find($animalId);
     
         if (!$animal) {
-            return redirect()->to('/adoption')->with('error', 'Animal not found.');
+            return redirect()->to('/sugency/adoption')->with('error', 'Animal not found.');
         }
 
         $catNeeds = $catNeedsModel->where('breed', $animal['breed'])->first();
     
-        return view('adoption_info', ['animal' => $animal, 'catNeeds' => $catNeeds]);
+        return view('iqbal/adoption/adoption_info', ['animal' => $animal, 'catNeeds' => $catNeeds]);
     }
 
     public function requestAdoption($animalId)
@@ -44,7 +44,7 @@ class AdoptionController extends Controller
         $userId = session()->get('user_id');
 
         if (!$userId) {
-            return redirect()->to('/login')->with('error', 'You need to log in to make an adoption request.');
+            return redirect()->to('/sugency/login')->with('error', 'You need to log in to make an adoption request.');
         }
 
         if ($this->request->getMethod() === 'post') {
@@ -92,10 +92,10 @@ class AdoptionController extends Controller
         $animal = $animalModel->find($animalId);
     
         if (!$animal) {
-            return redirect()->to('/adoption')->with('error', 'Animal not found.');
+            return redirect()->to('/sugency/adoption')->with('error', 'Animal not found.');
         }
     
-        return view('adoption_request_form', ['animal' => $animal]);
+        return view('iqbal/adoption/adoption_request_form', ['animal' => $animal]);
     }
     
     public function showHistory()
@@ -105,6 +105,6 @@ class AdoptionController extends Controller
         $userId = session()->get('user_id');
         $data['requests'] = $adoptionRequestModel->where('user_id', $userId)->findAll();
 
-        return view('adoption/history', $data);
+        return view('iqbal/adoption/history', $data);
     }
 }

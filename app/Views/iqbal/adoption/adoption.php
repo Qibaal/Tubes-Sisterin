@@ -146,15 +146,10 @@
     <div class="navbar">
         <h1>Sugency</h1>
         <ul>
-            <?php if (!session()->get('loggedin')): ?>
-                <li class="auth-buttons"><a href="/signup">Sign Up</a></li>
-                <li class="auth-buttons"><a href="/login">Login</a></li>
-            <?php else: ?>
-                <li><a href="/adoption">Cats</a></li>
-                <li><a href="/adoption/history">History</a></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/logout">Logout</a></li>
-            <?php endif; ?>
+            <li class="auth-buttons"><a href="/adoption">Cats</a></li>
+            <li class="auth-buttons"><a href="/adoption/history">History</a></li>
+            <li class="auth-buttons"><a href="/profile">Profile</a></li>
+            <li class="auth-buttons"><a href="/logout">Logout</a></li>
         </ul>
     </div>
     <div class="container">

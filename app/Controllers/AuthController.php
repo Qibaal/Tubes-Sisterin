@@ -11,12 +11,12 @@ class AuthController extends ResourceController
 
     public function showSignUpForm() 
     {
-        return view('auth/signup.php');
+        return view('iqbal/auth/signup.php');
     }
 
     public function showLoginForm() 
     {
-        return view('auth/login.php');
+        return view('iqbal/auth/login.php');
     }
 
 
@@ -89,7 +89,7 @@ class AuthController extends ResourceController
 
         session()->set($sessionData);
 
-        return redirect()->to('/adoption');
+        return redirect()->to('/sugency/adoption');
     }
 
     public function logout()
@@ -99,6 +99,6 @@ class AuthController extends ResourceController
         }
 
         session()->destroy();
-        return redirect()->to('/login');
+        return redirect()->to('/sugency/login');
     }
 }

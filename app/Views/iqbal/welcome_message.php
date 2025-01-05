@@ -111,37 +111,18 @@
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <div class="navbar">
         <h1>Sugency</h1>
-        <ul>
-            <?php if (!session()->userdata('user_data')): ?>
-                <!-- If not logged in -->
-                <li class="auth-buttons"><a href="/signup">Sign Up</a></li>
-                <li class="auth-buttons"><a href="/login">Login</a></li>
-            <?php else: ?>
-                <!-- If logged in -->
-                <li><a href="/adoption">Cats</a></li>
-                <li><a href="/adoption/history">History</a></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/logout">Logout</a></li>
-            <?php endif; ?>
-        </ul>
     </div>
 
-    <!-- Hero Section -->
     <div class="hero">
         <h2>Welcome to Sugency</h2>
         <p>
             Sugency is your one-stop solution for pet adoptions, offering a seamless platform for finding your perfect furry friend. 
             Whether you're looking to adopt, track your adoption history, or explore our wonderful collection of pets, Sugency has it all!
         </p>
-        <button onclick="location.href='/signup'">Get Started</button>
+        <button onclick="location.href='/sugency/signup'">Sign Up</button>
+        <button onclick="location.href='/login'">Login</button>
     </div>
-
-    <!-- Footer -->
-    <footer>
-        &copy; <?= date('Y') ?> Sugency. All Rights Reserved.
-    </footer>
 </body>
 </html>

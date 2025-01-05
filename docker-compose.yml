@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  sugency-app:
+    build:
+      context: .
+    container_name: sugency-app
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${DOCUMENT_ROOT-./www}:/var/www/html
+    environment:
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_NAME: tubes_sisterin
+      DB_USER: postgres
+      DB_PASS: iqbal2806

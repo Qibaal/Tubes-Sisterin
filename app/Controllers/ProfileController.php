@@ -37,7 +37,7 @@ class ProfileController extends ResourceController
                             ->first();
             
             if (!$user) {
-                return view('errors/html/error_404'); // Render a 404 view for non-AJAX requests
+                return view('../errors/html/error_404'); // Render a 404 view for non-AJAX requests
             }
             
             $userData = [
@@ -49,11 +49,11 @@ class ProfileController extends ResourceController
                 'member_since' => date('Y-m-d', strtotime($user['created_at']))
             ];
             
-            return view('profile', ['user' => $userData]); // Pass data to the view directly
+            return view('iqbal/profile', ['user' => $userData]); // Pass data to the view directly
             
         } catch (\Exception $e) {
             log_message('error', '[Profile::index] ' . $e->getMessage());
-            return view('errors/html/error_500'); // Render a 500 error view for exceptions
+            return view('../errors/html/error_500'); // Render a 500 error view for exceptions
         }
     }
 
