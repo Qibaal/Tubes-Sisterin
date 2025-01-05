@@ -24,14 +24,14 @@ class FoodsController extends Controller
         $foodId = $this->request->getPost('food_id');
 
         if (!$foodId) {
-            return redirect()->to('/foods')->with('error', 'Invalid product selection.');
+            return redirect()->to('/thecatalogue/foods')->with('error', 'Invalid product selection.');
         }
 
         $foodModel = new FoodModel();
         $food = $foodModel->find($foodId);
 
         if (!$food) {
-            return redirect()->to('/foods')->with('error', 'Product not found.');
+            return redirect()->to('/thecatalogue/foods')->with('error', 'Product not found.');
         }
 
         // Pass the selected product to the checkout view
@@ -43,20 +43,20 @@ class FoodsController extends Controller
         $foodId = $this->request->getPost('food_id');
     
         if (!$foodId) {
-            return redirect()->to('/foods')->with('error', 'Invalid product selection.');
+            return redirect()->to('/thecatalogue/foods')->with('error', 'Invalid product selection.');
         }
     
         $foodModel = new FoodModel();
         $food = $foodModel->find($foodId);
     
         if (!$food) {
-            return redirect()->to('/foods')->with('error', 'Product not found.');
+            return redirect()->to('/thecatalogue/foods')->with('error', 'Product not found.');
         }
     
         // Get the logged-in user's ID from the session
         $userId = session()->get('user_id');
         if (!$userId) {
-            return redirect()->to('/login')->with('error', 'You must be logged in to make a purchase.');
+            return redirect()->to('/thecatalogue/login')->with('error', 'You must be logged in to make a purchase.');
         }
 
         $orderModel = new OrderModel();
@@ -66,7 +66,7 @@ class FoodsController extends Controller
             'user_id' => (int)$userId 
         ]);
     
-        return redirect()->to('/foods')->with('success', 'Purchase completed for ');
+        return redirect()->to('/thecatalogue/foods')->with('success', 'Purchase completed for ');
     }  
 
 }

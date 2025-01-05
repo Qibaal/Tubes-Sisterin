@@ -122,7 +122,7 @@
             Whether you're looking to adopt, track your adoption history, or explore our wonderful collection of pets, Sugency has it all!
         </p>
         <button onclick="location.href='/sugency/signup'">Sign Up</button>
-        <button onclick="location.href='/login'">Login</button>
+        <button onclick="location.href='/sugency/login'">Login</button>
     </div>
 </body>
 </html>

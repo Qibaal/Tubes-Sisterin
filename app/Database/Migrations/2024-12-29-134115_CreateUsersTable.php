@@ -8,6 +8,8 @@ class CreateUsersTable extends Migration
 {
     public function up()
     {
+        $this->db->query("CREATE TYPE user_role AS ENUM ('admin', 'user');");
+
         $this->forge->addField([
             'id' => [
                 'type' => 'SERIAL',
@@ -45,29 +47,28 @@ class CreateUsersTable extends Migration
                 'default' => 'user',
             ],
             'created_at' => [
-                'type' => 'TIMESTAMP',
-                'default' => 'CURRENT_TIMESTAMP',
+                'type' => 'DATETIME',
+                'null' => true,
             ],
             'updated_at' => [
-                'type' => 'TIMESTAMP',
-                'default' => 'CURRENT_TIMESTAMP',
-                'on_update' => 'CURRENT_TIMESTAMP',
+                'type' => 'DATETIME',
+                'null' => true,
             ],
             'role' => [
                 'type' => 'user_role',
-                'null' => false,
-                'default' => '\'user\'',
+                'default' => 'user',
             ],
         ]);
 
-        $this->forge->addKey('id', true); // Primary Key
-        $this->forge->addUniqueKey('email'); // Unique Key on email
+        $this->forge->addKey('id', true);
+        $this->forge->addUniqueKey('email');
 
         $this->forge->createTable('users');
     }
 
     public function down()
     {
+        $this->db->query("DROP TYPE user_role;");
         $this->forge->dropTable('users');
     }
 }

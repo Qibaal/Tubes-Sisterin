@@ -89,17 +89,7 @@ class AuthCatalogueController extends ResourceController
 
         session()->set($sessionData);
 
-        return $this->respond([
-            'status' => 200,
-            'message' => 'Login successful',
-            'data' => [
-                'user' => [
-                    'id' => $user['id'],
-                    'email' => $user['email'],
-                    'full_name' => $user['full_name'],
-                ]
-            ]
-        ]);
+        return redirect()->to('/thecatalogue/foods');
     }
 
     public function logout()

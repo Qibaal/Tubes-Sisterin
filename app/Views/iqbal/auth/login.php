@@ -83,7 +83,7 @@
             <button type="submit">Login</button>
         </form>
         <div class="text-center" style="margin-top: 15px;">
-            <p>Don't have an account? <a href="signup">Sign up</a></p>
+            <p>Don't have an account? <a href="sugency/signup">Sign up</a></p>
         </div>
     </div>
 </body>

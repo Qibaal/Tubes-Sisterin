@@ -146,10 +146,10 @@
     <div class="navbar">
         <h1>Sugency</h1>
         <ul>
-            <li class="auth-buttons"><a href="/adoption">Cats</a></li>
-            <li class="auth-buttons"><a href="/adoption/history">History</a></li>
-            <li class="auth-buttons"><a href="/profile">Profile</a></li>
-            <li class="auth-buttons"><a href="/logout">Logout</a></li>
+            <li class="auth-buttons"><a href="/sugency/adoption">Cats</a></li>
+            <li class="auth-buttons"><a href="/sugency/adoption/history">History</a></li>
+            <li class="auth-buttons"><a href="/sugency/profile">Profile</a></li>
+            <li class="auth-buttons"><a href="/sugency/logout">Logout</a></li>
         </ul>
     </div>
     <div class="container">
@@ -167,7 +167,7 @@
                             <p><strong>Age:</strong> <?= esc($animal['age']) ?> <?= esc($animal['age'] == 1 ? 'year' : 'years') ?></p>
                             <p><?= esc($animal['description']) ?></p>
                             <span class="health-status"><?= esc($animal['health_status']) ?></span>
-                            <a href="/adoption/info/<?= esc($animal['id']) ?>" class="adopt-button">Adopt Me</a>
+                            <a href="/sugency/adoption/info/<?= esc($animal['id']) ?>" class="adopt-button">Adopt Me</a>
                         </div>
                     </li>
                 <?php endforeach; ?>

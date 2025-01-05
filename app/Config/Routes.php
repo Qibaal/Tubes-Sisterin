@@ -7,11 +7,11 @@ $routes->group('sugency', function($routes)
 {
     $routes->get('/', 'Home::index');
 
-    $routes->get('/signup', 'AuthController::showSignUpForm');
-    $routes->post('/signup', 'AuthController::signup');
-    $routes->get('/login', 'AuthController::showLoginForm');
-    $routes->post('/login', 'AuthController::login');
-    $routes->get('/logout', 'AuthController::logout');
+    $routes->get('signup', 'AuthController::showSignUpForm');
+    $routes->post('signup', 'AuthController::signup');
+    $routes->get('login', 'AuthController::showLoginForm');
+    $routes->post('login', 'AuthController::login');
+    $routes->get('logout', 'AuthController::logout');
     
     $routes->group('profile', ['filter' => 'auth'], function($routes) {
         $routes->get('/', 'ProfileController::index');
