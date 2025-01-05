@@ -39,24 +39,24 @@ $routes->group('sugency', function($routes)
 
 $routes->group('thecatalogue', function($routes) 
 {
-    $routes->get('/', 'Home::index');
+    $routes->get('/', 'HomeCatalogue::index');
 
-    $routes->get('/signup', 'AuthController::showSignUpForm');
-    $routes->post('/signup', 'AuthController::signup');
-    $routes->get('/login', 'AuthController::showLoginForm');
-    $routes->post('/login', 'AuthController::login');
-    $routes->get('/logout', 'AuthController::logout');
+    $routes->get('signup', 'AuthCatalogueController::showSignUpForm');
+    $routes->post('signup', 'AuthCatalogueController::signup');
+    $routes->get('login', 'AuthCatalogueController::showLoginForm');
+    $routes->post('login', 'AuthCatalogueController::login');
+    $routes->get('logout', 'AuthCatalogueController::logout');
     
     $routes->group('', ['filter' => 'auth'], function($routes) {
-        $routes->get('/foods', 'FoodsController::index');
-        $routes->post('/checkout', 'FoodsController::checkout');
-        $routes->post('/confirm-checkout', 'FoodsController::confirmCheckout');
-        $routes->get('/history', 'HistoryController::index');
+        $routes->get('foods', 'FoodsController::index');
+        $routes->post('checkout', 'FoodsController::checkout');
+        $routes->post('confirm-checkout', 'FoodsController::confirmCheckout');
+        $routes->get('history', 'HistoryCatalogueController::index');
     });
     
     $routes->group('profile', ['filter' => 'auth'], function($routes) {
-        $routes->get('/', 'ProfileController::index');
-        $routes->post('update', 'ProfileController::update');
+        $routes->get('/', 'ProfileCatalogueController::index');
+        $routes->post('update', 'ProfileCatalogueController::update');
     });
 });
 
