@@ -91,12 +91,20 @@
                 <img src="<?= esc($food['image_url']) ?>" alt="<?= esc($food['name']) ?>">
                 <div class="product-info">
                     <h2><?= esc($food['name']) ?></h2>
-                    <p class="price">$<?= esc($food['price']) ?></p>
+                    <p class="price">
+                        <?php if (!empty($food['promo_applied']) && $food['promo_applied']): ?>
+                            <span>Original Price: $<?= esc(round($food['original_price'], 2)) ?></span><br>
+                            Discounted Price: $<?= esc(round($food['price'], 2)) ?>
+                        <?php else: ?>
+                            $<?= esc(round($food['price'], 2)) ?>
+                        <?php endif; ?>
+                    </p>
                 </div>
             </div>
 
             <form method="POST" action="/thecatalogue/confirm-checkout">
                 <input type="hidden" name="food_id" value="<?= esc($food['id']) ?>">
+                <input type="hidden" name="price" value="<?= esc(round($food['price'], 2)) ?>"> <!-- Correct price sent -->
                 <button type="submit" class="checkout-button">Confirm Purchase</button>
             </form>
         <?php else: ?>
@@ -105,3 +113,5 @@
     </div>
 </body>
 </html>
+
+

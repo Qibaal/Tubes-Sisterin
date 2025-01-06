@@ -22,14 +22,13 @@ class AdoptionRequestModel extends Model
         'reason'
     ];
 
-    // Add validation rules
     protected $validationRules = [
         'user_id' => 'required|numeric',
         'animal_id' => 'required|numeric',
         'income' => 'required|numeric',
-        'living_type' => 'required|in_list[house,apartment]', // match your enum values
+        'living_type' => 'required|in_list[house,apartment]',
         'has_pets' => 'required|in_list[true,false,0,1]',
         'reason' => 'required|string',
-        'status' => 'required|in_list[pending,approved,rejected]' // match your enum values
+        'status' => 'required|in_list[pending,approved,rejected]'
     ];
 }

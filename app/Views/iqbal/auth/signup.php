@@ -95,7 +95,7 @@
             <button type="submit">Sign Up</button>
         </form>
         <div class="text-center" style="margin-top: 15px;">
-            <p>Already have an account? <a href="sugency/login">Login</a></p>
+            <p>Already have an account? <a href="/sugency/login">Login</a></p>
         </div>
     </div>
 </body>

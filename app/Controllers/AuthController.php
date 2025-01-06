@@ -46,10 +46,10 @@ class AuthController extends ResourceController
 
         try {
             $userModel->insert($data);
-            return $this->respondCreated(['message' => 'Signup successful!']);
+            return redirect()->to('/sugency/login');
         } catch (\Exception $e) {
             log_message('error', '[Auth::signup] ' . $e->getMessage());
-            return $this->failServerError('Failed to create account. Please try again later.');
+            return redirect()->to('/sugency/signup');
         }
     }
 

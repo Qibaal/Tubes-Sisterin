@@ -46,10 +46,10 @@ class AuthCatalogueController extends ResourceController
 
         try {
             $userModel->insert($data);
-            return $this->respondCreated(['message' => 'Signup successful!']);
+            return redirect()->to('/thecatalogue/login');
         } catch (\Exception $e) {
             log_message('error', '[Auth::signup] ' . $e->getMessage());
-            return $this->failServerError('Failed to create account. Please try again later.');
+            return redirect()->to('/thecatalogue/signup');
         }
     }
 

@@ -59,7 +59,6 @@ class AdoptionController extends Controller
         $adoptionRequestModel = new AdoptionRequestModel();
     
         try {
-            // Format has_pets as boolean
             $hasPets = $this->request->getPost('has_pets');
             $hasPetsBoolean = in_array($hasPets, ['1', 'true', true]) ? true : false;
     
@@ -107,18 +106,21 @@ class AdoptionController extends Controller
 
         $data['products'] = [
             [
-                'image' => '/asset/prod1.jpg',
+                'food_id' => 6,
+                'image' => 'https://cdn.onemars.net/sites/whiskas_id_xGoUJ_mwh5/image/whiskas-3d-1-2kg-fop-adult-tunasalmon-2_1713964404624_1720690073265_1723473561293.png',
                 'name' => 'Whiskas Tuna Delight',
                 'description' => 'A delicious tuna-flavored cat food',
             ],
             [
-                'image' => '/asset/prod2.jpg',
-                'name' => 'Cat Food',
+                'food_id' => 12,
+                'image' => 'https://petshopindonesia.com/wp-content/uploads/2022/12/i100058-friskies-indoor-delights-1-1-kg-makanan-kucing-rumahan-1.jpg',
+                'name' => 'Friskies Indoor Delights',
                 'description' => 'Specially formulated dry food',
             ],
             [
-                'image' => '/asset/prod3.jpg',
-                'name' => 'Scratching Post',
+                'food_id' => 13,
+                'image' => 'https://petshopindonesia.com/wp-content/uploads/2022/12/ii030051-royal-canin-hairball-care-400gr-makanan-kucing-dewasa-hairball-1-1.jpg',
+                'name' => 'Royal Canin Hairball',
                 'description' => 'Helps cats manage hairballs with balanced nutrition',
             ],
         ];

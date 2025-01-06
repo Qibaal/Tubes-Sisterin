@@ -125,7 +125,7 @@
         </header>
         <div class="pet-info">
             <div class="pet-image">
-                <img src="/asset/persian.png" alt="<?= esc($animal['name']) ?>">
+                <img src="<?= esc($animal['image']) ?>" alt="<?= esc($animal['name']) ?>">
             </div>
             
             <div class="pet-details">

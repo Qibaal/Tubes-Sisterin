@@ -160,7 +160,7 @@
             <?php if (!empty($animals) && is_array($animals)): ?>
                 <?php foreach ($animals as $animal): ?>
                     <li class="animal-item">
-                        <img src="/asset/persian.png" alt="<?= esc($animal['name']) ?>" class="animal-image">
+                        <img src="<?= esc($animal['image']) ?>" alt="<?= esc($animal['name']) ?>" class="animal-image">
                         <div class="animal-info">
                             <h2><?= esc($animal['name']) ?></h2>
                             <p><strong>Breed:</strong> <?= esc($animal['breed']) ?></p>

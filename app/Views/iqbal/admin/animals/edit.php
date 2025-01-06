@@ -11,7 +11,7 @@
         <label for="name">Name:</label>
         <input type="text" name="name" id="name" value="<?= esc($animal['name']) ?>" required><br>
         <label for="type">Type:</label>
-        <input type="text" name="type" id="type" value="<?= esc($animal['type']) ?>" required><br>
+        <input type="text" name="type" id="type" value="<?= esc($animal['breed']) ?>" required><br>
         <label for="age">Age:</label>
         <input type="number" name="age" id="age" value="<?= esc($animal['age']) ?>" required><br>
         <label for="description">Description:</label>

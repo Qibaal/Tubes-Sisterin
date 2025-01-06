@@ -22,7 +22,13 @@ class CreateFoodsTable extends Migration
                 'type'       => 'DECIMAL',
                 'constraint' => '10,2',
             ],
-            'image_url' => [
+            'stock' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+                'null'       => false,
+                'default'    => 0,  
+            ],
+            'image' => [
                 'type'       => 'TEXT',
             ],
             'description' => [

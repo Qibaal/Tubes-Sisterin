@@ -200,16 +200,20 @@
                                 </tr>
                                 <tr>
                                     <td colspan="7" class="product-recommendations">
-                                        <h2>Recommended Products for Your New Companion</h2>
+                                        <h2>Recommended Products from The Catalogue</h2>
                                         <div class="product-container">
-                                            <?php foreach ($products as $product): ?>
-                                                <div class="product-card">
-                                                    <img src="<?= $product['image']; ?>" alt="<?= $product['name']; ?>">
-                                                    <h3><?= $product['name']; ?></h3>
-                                                    <p><?= $product['description']; ?></p>
-                                                    <button class="buy-button">Buy</button>
-                                                </div>
-                                            <?php endforeach; ?>
+                                        <?php foreach ($products as $product): ?>
+                                            <div class="product-card">
+                                                <img src="<?= $product['image']; ?>" alt="<?= $product['name']; ?>">
+                                                <h3><?= $product['name']; ?></h3>
+                                                <p><?= $product['description']; ?></p>
+                                                <form action="<?= site_url('thecatalogue/checkout'); ?>" method="post">
+                                                    <input type="hidden" name="food_id" value="<?= $product['food_id']; ?>">
+                                                    <input type="hidden" name="promo" value="true">
+                                                    <button class="buy-button" type="submit">Buy</button>
+                                                </form>
+                                            </div>
+                                        <?php endforeach; ?>
                                         </div>
                                     </td>
                                 </tr>

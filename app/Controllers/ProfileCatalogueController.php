@@ -37,7 +37,7 @@ class ProfileCatalogueController extends ResourceController
                             ->first();
             
             if (!$user) {
-                return view('errors/html/error_404'); // Render a 404 view for non-AJAX requests
+                return view('errors/html/error_404');
             }
             
             $userData = [
@@ -49,20 +49,16 @@ class ProfileCatalogueController extends ResourceController
                 'member_since' => date('Y-m-d', strtotime($user['created_at']))
             ];
             
-            return view('favian/profile', ['user' => $userData]); // Pass data to the view directly
+            return view('favian/profile', ['user' => $userData]);
             
         } catch (\Exception $e) {
             log_message('error', '[Profile::index] ' . $e->getMessage());
-            return view('errors/html/error_500'); // Render a 500 error view for exceptions
+            return view('errors/html/error_500');
         }
     }
 
-
-
-    // Fixed update method signature
     public function update($id = null)
     {
-        // We'll use the session user_id instead of the URL parameter
         $userModel = new UserModel();
         $userId = session()->get('user_id');
         

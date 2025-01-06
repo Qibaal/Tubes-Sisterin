@@ -20,6 +20,10 @@ class CreateCatsTable extends Migration
                 'constraint' => 100,
                 'null' => false,
             ],
+            'image' => [
+                'type' => 'TEXT',
+                'null' => true,
+            ],
             'breed' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
