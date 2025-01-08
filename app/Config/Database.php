@@ -26,10 +26,10 @@ class Database extends Config
      */
     public array $default = [
         'DSN'          => '',
-        'hostname'     => 'localhost',
+        'hostname'     => 'autorack.proxy.rlwy.net',
         'username'     => 'postgres',
-        'password'     => 'iqbal2806',
-        'database'     => 'tubes_sisterin',
+        'password'     => 'TuhtbuzxyNrJhxIKiXOAvRpoHWfVZRyB',
+        'database'     => 'railway',
         'DBDriver'     => 'Postgre',
         'DBPrefix'     => '',
         'pConnect'     => false,
@@ -41,7 +41,7 @@ class Database extends Config
         'compress'     => false,
         'strictOn'     => false,
         'failover'     => [],
-        'port'         => 5432,
+        'port'         => 56232,
         'numberNative' => false,
         'dateFormat'   => [
             'date'     => 'Y-m-d',
