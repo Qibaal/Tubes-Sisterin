@@ -66,8 +66,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>Request Adoption for <span id="animal-name"></span></h1>
-        <form action="<?= base_url('sugency/adoption/request/' . $animal['id']) ?>" method="POST">
+        <h1>Request Adoption</h1>
+        <form action="<?= base_url('sugency/adoption/request/' . $animal['id']) ?>" method="post">
             <div>
                 <label for="income">Monthly Income:</label>
                 <input type="number" name="income" id="income" step="0.01" required>

@@ -57,31 +57,27 @@ class AdoptionController extends Controller
     private function handleAdoptionRequest($userId, $animalId)
     {
         $adoptionRequestModel = new AdoptionRequestModel();
+
+        $hasPets = $this->request->getPost('has_pets');
+        $hasPetsBoolean = $hasPets === 'true' ? 't' : 'f';
+
+        $data = [
+            'user_id' => $userId,
+            'animal_id' => $animalId,
+            'income' => $this->request->getPost('income'),
+            'living_type' => $this->request->getPost('living_type'),
+            'has_pets' => $hasPetsBoolean,
+            'reason' => $this->request->getPost('reason'),
+            'status' => 'pending'
+        ];
+
     
         try {
-            $hasPets = $this->request->getPost('has_pets');
-            $hasPetsBoolean = in_array($hasPets, ['1', 'true', true]) ? true : false;
-    
-            $data = [
-                'user_id' => (int)$userId,
-                'animal_id' => (int)$animalId,
-                'income' => (float)$this->request->getPost('income'),
-                'living_type' => $this->request->getPost('living_type'),
-                'has_pets' => $hasPetsBoolean,
-                'reason' => $this->request->getPost('reason'),
-                'status' => 'pending'
-            ];
-    
-            if (!$adoptionRequestModel->insert($data)) {
-                log_message('error', 'Validation errors: ' . print_r($adoptionRequestModel->errors(), true));
-                return redirect()->back()
-                    ->with('error', 'Validation failed: ' . implode(', ', $adoptionRequestModel->errors()));
-            }
-    
-            return redirect()->to('/adoption')->with('success', 'Adoption request submitted successfully.');
+            $adoptionRequestModel->insert($data);
+            return redirect()->to('/adoption')->with('success', 'Adoption request submitted');
         } catch (\Exception $e) {
             log_message('error', 'Exception: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Database error occurred.');
+            return redirect()->to('/adoption')->with('error', 'Database error.');
         }
     }
     

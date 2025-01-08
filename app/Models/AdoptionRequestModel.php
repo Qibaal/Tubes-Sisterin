@@ -25,9 +25,9 @@ class AdoptionRequestModel extends Model
     protected $validationRules = [
         'user_id' => 'required|numeric',
         'animal_id' => 'required|numeric',
-        'income' => 'required|numeric',
-        'living_type' => 'required|in_list[house,apartment]',
-        'has_pets' => 'required|in_list[true,false,0,1]',
+        'income' => 'required|string',
+        'living_type' => 'required|string',
+        'has_pets' => 'required|boolean',
         'reason' => 'required|string',
         'status' => 'required|in_list[pending,approved,rejected]'
     ];

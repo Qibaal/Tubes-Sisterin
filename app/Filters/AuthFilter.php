@@ -14,7 +14,7 @@ class AuthFilter implements FilterInterface
         {
             return service('response')->setJSON([
                 'status' => 401,
-                'message' => 'Please login to access this resource'
+                'message' => 'Please login'
             ])->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED);
         }
     }
