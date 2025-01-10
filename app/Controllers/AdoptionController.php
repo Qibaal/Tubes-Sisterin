@@ -92,6 +92,69 @@ class AdoptionController extends Controller
     
         return view('iqbal/adoption/adoption_request_form', ['animal' => $animal]);
     }
+
+    public function getFoodsForBreed($breed)
+    {
+        $client = \Config\Services::curlrequest();
+        $token = $this->getToken();
+
+        if (!$token) {
+            return redirect()->to('/login')->with('error', 'Authentication required.');
+        }
+
+        $response = $client->get('/thecatalogue/foods/suitable', [
+            'query' => ['breed' => $breed],
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+            ],
+        ]);
+
+        if ($response->getStatusCode() !== 200) {
+            return redirect()->to('/adoption')->with('error', 'Failed to fetch suitable foods.');
+        }
+
+        $foods = json_decode($response->getBody(), true);
+
+        return view('iqbal/adoption/foods_list', ['foods' => $foods, 'breed' => $breed]);
+    }
+
+    public function buyFood()
+    {
+        $foodId = $this->request->getPost('food_id');
+
+        if (!$foodId) {
+            return redirect()->to('/adoption')->with('error', 'Invalid food selection.');
+        }
+
+        $client = \Config\Services::curlrequest();
+        $token = $this->getToken();
+
+        if (!$token) {
+            return redirect()->to('/login')->with('error', 'Authentication required.');
+        }
+
+        $response = $client->post('/thecatalogue/foods/checkout', [
+            'form_params' => [
+                'food_id' => $foodId,
+                'promo' => 'true',
+            ],
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+            ],
+        ]);
+
+        if ($response->getStatusCode() !== 200) {
+            return redirect()->to('/adoption')->with('error', 'Failed to purchase food.');
+        }
+
+        return redirect()->to('/adoption')->with('success', 'Food purchased successfully!');
+    }
+
+    private function getToken()
+    {
+        $session = \Config\Services::session();
+        return $session->get('auth_token');
+    }
     
     public function showHistory()
     {
