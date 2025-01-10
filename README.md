@@ -1,6 +1,6 @@
 # Tugas Besar Sisterin Kelompok 2
 
-Sugency adalah ...
+Sugency berkolaborasi dengan core service dari The Catalogue, suatu layanan penyedia kebutuhan kucing. Kolaborasi antara Sugency dan The Catalogue menghasilkan fitur baru, yaitu WhiskerChoice. Fitur ini menargetkan pemenuhan kebutuhan kucing yang tepat sesuai dengan jenis nya.  Kerjasama yang unik antara Sugency dan The Catalogue ini diharapkan dapat meningkatkan kualitas pengalaman mengadopsi kucing. 
 
 ## Gambaran Proyek
 Proyek ini terdiri dari dua modul utama:
